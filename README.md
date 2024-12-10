@@ -1,160 +1,158 @@
-Ticket Booking System
-A multi-threaded ticket booking system with a Spring Boot backend and Angular front-end.
+# Ticket Booking System
 
-Requirements
-Java 8 or later for Spring Boot
-Google Gson library for JSON parsing and generation
-Node.js and npm for Angular setup
-Spring Boot application connected to a database
-Backend Setup (Spring Boot)
-Clone or Download the Repository.
+A multi-threaded ticket booking application built with Spring Boot backend and Angular frontend. This system allows vendors to release tickets and customers to purchase them in real-time.
 
-Install Dependencies: Make sure you have Spring Boot set up and dependencies configured. You can use Maven or Gradle to manage dependencies.
+## System Requirements
 
-If you're using Maven, run:
+### Backend Requirements
+- Java 8 or later
+- Maven or Gradle
+- MySQL/PostgreSQL (or your preferred database)
+- Spring Boot
+- Google Gson library (included)
 
-bash
-Copy code
-mvn install
-Run the Spring Boot Application:
+### Frontend Requirements
+- Node.js (Latest LTS version)
+- npm (comes with Node.js)
+- Angular CLI
+- Modern web browser
 
-To run the backend Spring Boot application, use:
+## Installation Guide
 
-bash
-Copy code
-mvn spring-boot:run
-The backend will be accessible at http://localhost:9090.
+### Backend Setup (Spring Boot)
 
-Database Configuration: Ensure that your database is properly set up and connected. The backend will use the configured database to store and manage ticket data.
+1. **Clone the Repository**
+   ```bash
+   git clone [repository-url]
+   cd ticket-booking-system/backend
+   ```
 
-Start or Stop: Once the application is running, you can interact with it via the Angular frontend or through REST API calls.
+2. **Configure Database**
+   - Open `src/main/resources/application.properties`
+   - Update database credentials:
+     ```properties
+     spring.datasource.url=jdbc:mysql://localhost:3306/ticket_db
+     spring.datasource.username=your_username
+     spring.datasource.password=your_password
+     ```
 
-Frontend Setup (Angular)
-1. Install Node.js and npm
-To install Node.js (which includes npm), follow the instructions on the official website:
+3. **Install Dependencies**
+   ```bash
+   mvn install
+   ```
 
-Download Node.js
-After installation, verify it by running the following commands in your terminal:
+4. **Run Backend**
+   ```bash
+   mvn spring-boot:run
+   ```
+   Backend will start on `http://localhost:9090`
 
-bash
-Copy code
-node -v
-npm -v
-Both should display the installed version numbers.
+### Frontend Setup (Angular)
 
-2. Install Angular CLI
-Once Node.js and npm are installed, install the Angular CLI globally by running:
+1. **Install Node.js and npm**
+   - Download from [Node.js official website](https://nodejs.org/)
+   - Verify installation:
+     ```bash
+     node -v
+     npm -v
+     ```
 
-bash
-Copy code
-npm install -g @angular/cli
-3. Set Up the Angular Frontend
-Navigate to the Angular project directory.
+2. **Install Angular CLI**
+   ```bash
+   npm install -g @angular/cli
+   ```
 
-bash
-Copy code
-cd path/to/angular/project
-Install required dependencies for the Angular project:
+3. **Setup Frontend Project**
+   ```bash
+   cd ticket-booking-system/frontend
+   npm install
+   ```
 
-bash
-Copy code
-npm install
-Start the Angular development server:
+4. **Start Frontend Server**
+   ```bash
+   ng serve
+   ```
+   Frontend will be available at `http://localhost:4200`
 
-bash
-Copy code
-ng serve
-This will run the Angular application at http://localhost:4200.
+## Usage Guide
 
-4. Backend and Frontend Integration
-Ensure that the Spring Boot backend and Angular frontend are running:
+### Starting the System
 
-The Spring Boot backend will run on localhost:9090.
-The Angular frontend will run on localhost:4200.
-You may need to set up CORS in your Spring Boot application to allow the frontend to communicate with the backend. If needed, add a CORS configuration in your backend code.
+1. Start your database server
+2. Launch backend server (Spring Boot)
+3. Start frontend application (Angular)
+4. Access the application at `http://localhost:4200`
 
-5. Accessing the System
-Once both backend and frontend are running, open a web browser and go to http://localhost:4200 to access the ticket booking system. The Angular frontend will interact with the Spring Boot backend via the API at http://localhost:9090.
+### Using the Application
 
-Example Output
-Backend (Spring Boot):
-sql
-Copy code
-Do you want to START or STOP the program? (Type START or STOP)
-START
-Vendor released 10 tickets. Available tickets: 10
-Customer-1 bought 10 tickets. Available tickets: 0
-Total tickets sold: 20
-Ticket booking system has completed all operations.
-Frontend (Angular):
-The frontend will allow users to interact with the system, view available tickets, and simulate purchases. It will connect to the backend for ticket retrieval and display the status in real time.
+#### For Administrators:
+1. Log in to the admin panel
+2. Monitor ticket availability
+3. Release new tickets when needed
+4. View transaction history
 
-Troubleshooting
-1. Backend Not Starting
-Solution: Check for missing dependencies or incorrect database settings. Ensure the database is running and the backend is configured for port 9090.
-2. CORS Errors
-Solution: Add CORS configuration in Spring Boot. Allow all origins, methods, and headers for cross-origin requests.
-3. Database Connection Issues
-Solution: Verify database credentials and ensure the database is running.
-4. Angular Not Loading
-Solution: Run npm install to install dependencies. Check browser console for errors.
-5. Tickets Not Available
-Solution: Ensure the vendor thread is releasing tickets correctly and the ticket pool logic is working.
-6. Invalid Configuration Input
-Solution: Enter valid numeric values when prompted. The system will prompt for re-entry if invalid input is detected.
-Special Dependencies
-The backend uses several important dependencies to enhance functionality:
+#### For Customers:
+1. Browse available tickets
+2. Select desired quantity
+3. Complete purchase process
+4. View booking confirmation
 
-Gson - For JSON parsing and generation.
+## Troubleshooting Guide
 
-xml
-Copy code
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    <version>2.10.1</version>
-</dependency>
-Spring Boot CORS Support - For handling cross-origin requests, allowing the frontend to communicate with the backend when they are on different ports.
+### Common Issues and Solutions
 
-xml
-Copy code
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-cors</artifactId>
-</dependency>
-Hibernate Validator - Provides bean validation support (e.g., @NotNull, @Size annotations).
+1. **Backend Won't Start**
+   - Verify database is running
+   - Check application.properties configuration
+   - Ensure port 9090 is available
 
-xml
-Copy code
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>6.2.0.Final</version>
-</dependency>
-Spring Boot Security - For implementing authentication and authorization in the system.
+2. **Frontend Connection Issues**
+   - Confirm backend is running
+   - Check CORS configuration
+   - Verify API endpoint URLs
 
-xml
-Copy code
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
-Spring Boot Actuator - Adds production-ready features such as health checks and metrics.
+3. **Database Connection Failed**
+   - Verify database credentials
+   - Ensure database service is running
+   - Check network connectivity
 
-xml
-Copy code
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-actuator</artifactId>
-</dependency>
-Lombok - Reduces boilerplate code like getters, setters, and constructors.
+4. **Angular Build Errors**
+   - Clear npm cache: `npm cache clean --force`
+   - Delete node_modules: `rm -rf node_modules`
+   - Reinstall dependencies: `npm install`
 
-xml
-Copy code
-<dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.24</version>
-    <scope>provided</scope>
-</dependency>
-These dependencies are essential for making the application more efficient, secure, and easy to manage.
+## API Documentation
+
+### Backend Endpoints
+
+```
+GET /api/tickets - Get available tickets
+POST /api/tickets/purchase - Purchase tickets
+GET /api/tickets/status - Get system status
+```
+
+### Sample API Requests
+
+```bash
+# Get available tickets
+curl http://localhost:9090/api/tickets
+
+# Purchase tickets
+curl -X POST http://localhost:9090/api/tickets/purchase \
+  -H "Content-Type: application/json" \
+  -d '{"quantity": 2}'
+```
+
+## Security Considerations
+
+- The system implements basic authentication
+- API endpoints are protected with JWT
+- Database passwords are encrypted
+- CORS is configured for frontend access only
+
+## Support
+
+For additional support or bug reports, please contact:
+- Email: support@ticketbooking.com
+- Issue Tracker: [GitHub Issues](github.com/ticket-booking/issues)
+
